@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    h1= title
+    - let results=[{continents: "Asia",continentnum:1,country:"India"},{continents: "Africa",continentnum:2,country:"Nigeria"},{continents: "Europe",continentnum:3,country:"France"}]
+    div.container-fliud
+        div.row
+            each item,ind in results 
+                div(class='col-sm-2' onclick=`buy(${ind})`) 
+                    p Continent  is #{item.continents}
+                    p Position is #{item.continentnum}
+                    p Country is #{item.country}
+    script. 
+        function buy(i){
+            alert("You purchased item "+(i+1))
+        }
