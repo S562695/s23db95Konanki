@@ -1,2 +1,7 @@
 # s23wb95Konanki
-Hello folks
+Hello Folks https://s23db95konanki.onrender.com
+## Earth
+continents(String)
+Continentnum(String)
+position(number)
+
