@@ -1,0 +1,21 @@
+extends layout
+block content
+ h1= title
+ - let earthid = toShow._id
+ - let continents = toShow.continents
+ - let continentnum = toShow.continentnum
+ - let country = toShow.country
+ div
+  div.row
+   div(class='earthAttr mr-3') earth id is:
+   div #{earthid}
+  div.row
+   div(class='earthAttr mr-3') earth continents is:
+   div #{continents}
+  div.row
+   div(class='earthAttr mr-3') earth continentnum is:
+   div #{continentnum}
+  div.row
+   div(class='earthAttr mr-3') earth country is:
+   div #{country}
+  

@@ -1,0 +1,51 @@
+extends layout
+
+block content
+    h1= title
+    
+    if (toShow == null)
+        h2 No instance to delete
+    else
+        -let earthid = toShow._id
+        -let continents = toShow.continents
+        - let continentnum = toShow.continentnum
+        - let country = toShow.country
+        - let actionid = "/resource/earth/" + earthid
+        script let actionid = "#{actionid}"
+        div
+            div.row
+                div(class='earthAttr mr-3') earth ID is:
+                div #{earthid}
+            div.row
+                div(class='earthAttr mr-3') earth continents is:
+                div #{continents}
+            div.row
+                div(class='earthAttr mr-3') earth continentnum is:
+                div #{continentnum}
+            div.row
+                div(class='earthAttr mr-3') earth country is:
+                div #{country}
+        
+        button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+        button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+    script.
+            function cancel() {
+            // Go back to the home page for the earth collection
+            window.location.href='/earth'
+            }
+    script.
+                function deleteOnid() {
+                // delete first
+                fetch(actionid, {
+                method: 'DELETE' // Don't need a body for the delete
+                }).then((resp) => {
+                return resp.json(); // or resp.text() or whatever the server sends
+                }).then((body) => {
+                alert("Delete succeded")
+                window.location.href='/earth'
+                // TODO handle body
+                }).catch((error) => {
+                // TODO handle error
+                alert("Delete failed " + error )
+                });
+                }

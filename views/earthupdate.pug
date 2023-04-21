@@ -1,0 +1,42 @@
+extends layout
+
+block content
+  h1= title
+  -let earthid = toShow._id
+  -let continents = toShow.continents
+  -let continentnum = toShow.continentnum
+  -let country = toShow.country
+
+  div.row(class='mb-2')
+    div.mr-1 ID is
+    div #{earthid}
+  - let actionid = "/resource/earth/" + earthid
+  form(id='earthForm', action= actionid, method="PUT")
+    div.form-group
+        label.earthAttr(for='continents') earth continents
+        input#continents(type='text', name='continents', value= continents )
+    div.form-group
+        label.earthAttr(for='continentnum') earth continentnum
+        input#continentnum(type='number', name='continentnum', value= continentnum )
+    div.form-group
+        label.earthAttr(for='country') earth country
+        input#country(type='text', name='country', value= country )
+    input(type="submit")
+  script.
+    document.forms['earthForm'].addEventListener('submit', (event) => {
+      event.preventDefault();
+    // TODO do something here to show user that form is being submitted
+      fetch(event.target.action, {
+        method:'PUT',
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+      }).then((resp) => {
+        return resp.json(); // or resp.text() or whatever the server sends
+      }).then((body) => {
+        alert("Update succeded")
+        window.location.href='/earth'
+    // TODO handle body
+      }).catch((error) => {
+    // TODO handle error
+        alert("Update failed " + error )
+      });
+    });
