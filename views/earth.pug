@@ -1,12 +1,19 @@
 extends layout
 
 block content
-    h1= title
-    - let results=[{continents: "Asia",continentnum:1,country:"India"},{continents: "Africa",continentnum:2,country:"Nigeria"},{continents: "Europe",continentnum:3,country:"France"},{continents: "Asia",continentnum:1,country:"India"}]
-    div.container-fliud
-        div.row
-            each item,ind in results 
-                div(class='col-sm-2' onclick=`buy(${ind})`) 
-                    p Continent  is #{item.continents}
-                    p Position is #{item.continentnum}
-                    p Country is #{item.country}
+  h1= title
+  - let earths = results;
+  div(class="container-fluid")
+    div(class="row")
+      each item in earths
+        - let destination = `dispatch(\"/earth/update?id=${item._id}\")`
+            div(class="row-sm-2", class="m-1") Item #{item.continents}(#{item.continentnum}) is #{item.country}
+            button.btn( class="btn-primary ml-1", onclick= destination) Update
+  script.
+    function buy((itemNo)) {
+      alert(`You purchased Item ${itemNo+1}`)
+    }
+
+    function dispatch(path){
+      window.location.href=path
+    }
