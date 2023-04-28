@@ -7,6 +7,8 @@ block content
     div(class="row")
       each item in earths
         - let destination = `dispatch(\"/earth/update?id=${item._id}\")`
+        - let destination1 = `dispatch(\"/market/detail?id=${market._id}\")`
+        - let destination2 = `dispatch(\"/market/delete?id=${market._id}\")`
           div(class="col-sm-2",onClick=`buy(${index})`)
             div(class="row-sm-2", class="m-1") Item #{item.continents}(#{item.continentnum}) is #{item.country}
             button.btn( class="btn-primary m-1", onclick= destination) Update
