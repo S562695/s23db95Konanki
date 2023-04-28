@@ -1,17 +1,11 @@
 extends layout
-
 block content
-  h1= title
-  p Welcome to Naga Lakshmi's World
-  button(type="button", class="btn btn-secondary" onclick="doReduce()") Press Me
-  div(id="reduce") Reduce the value
-  a(href='earth') Earth link
-  script.
-    let count=20;
-    let change =-1;
-    function doReduce(){
-      console.log("Enter:")
-      count=count+change;
-      change=change-1;
-      document.getElementById('reduce').innerHTML=`Count ${count} with Change ${change}`
-    }
+ if (!user)
+  a(href="/login") Login
+  br
+  a(href="/register") Register
+ if (user)
+  p You are currently logged in as #{user.username}
+  a(href="/earth") Take me to Earth
+  br
+  a(href="/logout") Logout

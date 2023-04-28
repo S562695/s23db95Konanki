@@ -6,19 +6,24 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var passport = require('passport'); 
 const LocalStrategy = require('passport-local').Strategy;
-passport.use(new LocalStrategy( 
-  function(username, password, done) { 
-    Account.findOne({ username: username }, function (err, user) { 
-      if (err) { return done(err); } 
-      if (!user) { 
-        return done(null, false, { message: 'Incorrect username.' }); 
-      } 
-      if (!user.validPassword(password)) { 
-        return done(null, false, { message: 'Incorrect password.' }); 
-      } 
-      return done(null, user); 
-    }); 
-  }))
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    Account.findOne({ username: username })
+    .then(function (user){
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    })
+    .catch(function(err){
+      return done(err)
+    })
+  })
+)
 var earth = require("./models/earth");
 require('dotenv').config();
 const connectionString =
